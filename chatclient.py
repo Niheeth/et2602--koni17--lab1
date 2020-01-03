@@ -1,17 +1,18 @@
+#!/usr/bin/python
 import socket,sys,select,string
 soc = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 if (len(sys.argv) < 3):
-	print("ENTER: python chat-client.py hostname:port username")
+	print("ENTER: ./chatclient hostname:port username")
 	sys.exit()
 in_list = sys.argv[1].split(':')
-print(in_list)
+#print(in_list)
 HOSTNAME = in_list[0]
 PORTNUMBER = int(in_list[1])
 username = sys.argv[2]
 soc.settimeout(8)
 soc.connect((HOSTNAME,PORTNUMBER))
-print("connection established")
-nick = 'NICK '+ username
+#print("connection established")
+nick = "NICK " + username
 soc.send(nick)
 x =''
 while True :
@@ -25,8 +26,8 @@ while True :
 				sys.exit()
 			else:
 			        if message_recieved != 'MSG ' +username+' '+x :
-			        	sys.stdout.write(message_recieved.strip('MSG '))
-			        	sys.stdout.flush()
+		                    sys.stdout.write(message_recieved.strip('MSG '))
+		                    sys.stdout.flush()
 			        else :
 			            continue
 				
@@ -41,4 +42,4 @@ while True :
 		     sys.stdout.flush()
 
 
-s.close()		     	         
+s.close()
